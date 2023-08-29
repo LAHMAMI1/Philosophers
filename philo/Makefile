@@ -6,7 +6,41 @@
 #    By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/25 10:18:14 by olahmami          #+#    #+#              #
-#    Updated: 2023/08/25 10:18:15 by olahmami         ###   ########.fr        #
+#    Updated: 2023/08/27 21:24:30 by olahmami         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+done = \033[0m
+Red	= \033[0;31m
+Green = \033[0;32m
+
+NAME = philo
+
+CC = gcc
+
+CFLAGS = -Wall -Wextra -Werror -pthread -g -fsanitize=address
+
+SRCS = philo.c \
+	   check_int.c \
+
+OBJS = $(SRCS:.c=.o)
+
+.c.o	:
+	@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@echo "\r$ $(Green) Created philo! $(done)"
+
+clean:
+	@rm -rf $(OBJS)
+	@echo "\r$ $(Red) Cleaning! $(done)"
+	
+fclean: clean
+	@rm -rf $(NAME)
+	
+re: fclean all
+
+.PHONY: all clean fclean re
