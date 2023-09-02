@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:18:33 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/02 00:02:09 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/02 04:05:51 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,20 @@ int	main(int ac, char **av)
 		return (1);
 	if (init_philo_fork(data))
 		return (1);
+	int i;
+	i = 0;
+	while (i < data->num_philo)
+	{
+		pthread_join(data->philos[i].threads, NULL);
+		i++;
+	}
+	i = 0;
+	while (i < data->num_philo)
+	{
+		if (pthread_mutex_destroy(&data->forks[i]))
+			return (1);
+		i++;
+	}
 	// printf("num_philo: %d\n", data->num_philo);
 	return (0);
 }
