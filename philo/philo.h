@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:19:15 by olahmami          #+#    #+#             */
-/*   Updated: 2023/08/31 17:05:56 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/02 00:01:02 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef struct s_data
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					num_t_eat;
+	int					num_time_eat;
 	pthread_mutex_t		*forks;
 	long				start_time;
 	t_philo				*philos;
@@ -44,7 +44,9 @@ int						ft_isdigit(int c);
 int						check_atoi(char *str);
 int						check_args(char **av);
 
+int init_data(int ac, char **av, t_data *data);
+int init_philo_fork(t_data *data);
 void					*to_do(void *arg);
-long					current_time_in_milliseconds(void);
+long					current_time_in_milliseconds();
 
 #endif
