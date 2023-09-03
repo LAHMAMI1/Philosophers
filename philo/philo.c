@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:18:33 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/02 04:05:51 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/03 02:49:42 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int init_philo_fork(t_data *data)
 			return (1);
 		i++;
 	}
+	if (pthread_mutex_init(&data->print, NULL))
+		return (1);
 	return (0);
 }
 
@@ -75,6 +77,8 @@ int	main(int ac, char **av)
 			return (1);
 		i++;
 	}
+	if (pthread_mutex_destroy(&data->print))
+		return (1);
 	// printf("num_philo: %d\n", data->num_philo);
 	return (0);
 }
