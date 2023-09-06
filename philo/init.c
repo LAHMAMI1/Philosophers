@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 23:37:55 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/06 01:51:40 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 04:35:30 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,34 @@ int init_philos_forks(t_philo *philo, t_data *data)
 		philo[i].last_eat = current_time();
 		if (pthread_mutex_init(&data->forks[i], NULL))
 			return (1);
+		if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
+			return (1);
 		i++;
 	}
-	// i = 0;
-	// while (i < data->num_philo)
-	// {
-	// 	if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
-	// 		return (1);
-	// 	i += 2;
-	// }
-	// usleep(1000);
-	// i = 1;
-	// while (i < data->num_philo)
-	// {
-	// 	if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
-	// 		return (1);
-	// 	i += 2;
-	// }
+	return (0);
+}
+
+int join_destroy(t_philo *philo, t_data *data)
+{
+	int i;
+
 	i = 0;
 	while (i < data->num_philo)
 	{
-		if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
+		if(pthread_join(philo[i].threads, NULL))
 			return (1);
-		i ++;
+		i++;
 	}
+	i = 0;
+	while (i < data->num_philo)
+	{
+		if (pthread_mutex_destroy(&data->forks[i]))
+			return (1);
+		i++;
+	}
+	if (pthread_mutex_destroy(&data->print))
+		return (1);
+	if (pthread_mutex_destroy(&data->dead))
+		return (1);
 	return (0);
 }

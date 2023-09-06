@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:21:14 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/06 01:59:16 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 03:35:54 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void *to_do(void *arg)
 		pthread_mutex_lock(&philo->data->forks[(philo->id) % philo->data->num_philo]);
 		print_msg("has taken a right fork", philo);
 		print_msg("is eating", philo);
-		my_sleep(philo->data->time_to_eat);
 		pthread_mutex_lock(&philo->data->dead);
 		philo->last_eat = current_time();
 		pthread_mutex_unlock(&philo->data->dead);
+		my_sleep(philo->data->time_to_eat);
 		pthread_mutex_unlock(&philo->data->forks[philo->id % philo->data->num_philo]);
 		pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);
 		print_msg("is sleeping", philo);

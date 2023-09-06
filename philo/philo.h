@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 10:19:15 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/05 05:52:39 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 04:31:49 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ void *to_do(void *arg);
 void	print_msg(char *str, t_philo *philo);
 void	my_sleep(long time);
 int check_dead(t_philo *philo);
+int join_destroy(t_philo *philo, t_data *data);
 
 #endif
