@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:11:11 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/05 05:54:28 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 02:15:32 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,20 @@ int check_dead(t_philo *philo)
 {
 	int i;
 
-	pthread_mutex_lock(&philo->data->dead);
 	i = 0;
 	while (i < philo->data->num_philo)
 	{
-		if (current_time() - philo[i].last_eat >= philo->data->time_to_die)
+		pthread_mutex_lock(&philo->data->dead);
+		if (current_time() - philo[i].last_eat > philo->data->time_to_die)
 		{
 			print_msg("died", &philo[i]);
+			pthread_mutex_unlock(&philo->data->dead);
 			return (1);
 		}
 		i++;
 		if (i == philo->data->num_philo)
 			i = 0;
+		pthread_mutex_unlock(&philo->data->dead);
 	}
-	pthread_mutex_unlock(&philo->data->dead);
 	return (0);
 }

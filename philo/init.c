@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 23:37:55 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/05 05:52:10 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 01:51:40 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,27 @@ int init_philos_forks(t_philo *philo, t_data *data)
 			return (1);
 		i++;
 	}
+	// i = 0;
+	// while (i < data->num_philo)
+	// {
+	// 	if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
+	// 		return (1);
+	// 	i += 2;
+	// }
+	// usleep(1000);
+	// i = 1;
+	// while (i < data->num_philo)
+	// {
+	// 	if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
+	// 		return (1);
+	// 	i += 2;
+	// }
 	i = 0;
 	while (i < data->num_philo)
 	{
 		if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
 			return (1);
-		i += 2;
-	}
-	usleep(1000);
-	i = 1;
-	while (i < data->num_philo)
-	{
-		if (pthread_create(&philo[i].threads, NULL, &to_do, &philo[i]))
-			return (1);
-		i += 2;
+		i ++;
 	}
 	return (0);
 }

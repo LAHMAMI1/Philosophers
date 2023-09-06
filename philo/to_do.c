@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:21:14 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/05 05:53:13 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/06 01:59:16 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void *to_do(void *arg)
 {
 	t_philo *philo;
-
 	philo = (t_philo *)arg;
+	if(philo->id % 2 == 0)
+		usleep(1000);
 	while (1)
 	{
 		pthread_mutex_lock(&philo->data->forks[philo->id - 1]);

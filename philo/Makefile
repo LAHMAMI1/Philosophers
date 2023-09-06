@@ -6,7 +6,7 @@
 #    By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/25 10:18:14 by olahmami          #+#    #+#              #
-#    Updated: 2023/09/04 03:57:32 by olahmami         ###   ########.fr        #
+#    Updated: 2023/09/06 01:52:35 by olahmami         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,11 @@ NAME = philo
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -pthread
-#CFLAGS += -g -fsanitize=thread 
+# CFLAGS += -g -fsanitize=thread 
 
 SRCS = philo.c \
 	   check_int.c \
+	   init.c \
 	   utils.c \
 	   to_do.c \
 
