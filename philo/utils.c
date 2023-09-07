@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:11:11 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/06 04:33:08 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/07 04:38:59 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,15 @@ int check_dead(t_philo *philo)
 	i = 0;
 	while (i < philo->data->num_philo)
 	{
+		pthread_mutex_lock(&philo->data->c_eat);
+		if (philo->data->num_time_eat != -1 && philo[i].count_meals == philo->data->num_time_eat)
+		{
+			pthread_mutex_unlock(&philo->data->c_eat);
+			return (1);
+		}
+		pthread_mutex_unlock(&philo->data->c_eat);
 		pthread_mutex_lock(&philo->data->dead);
-		if (current_time() - philo[i].last_eat > philo->data->time_to_die)
+		if (current_time() - philo[i].last_eat >= philo->data->time_to_die)
 		{
 			print_msg("died", &philo[i]);
 			pthread_mutex_unlock(&philo->data->dead);
