@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 19:44:24 by olahmami          #+#    #+#             */
-/*   Updated: 2023/08/29 20:48:23 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/08 00:49:29 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,17 @@ int	check_atoi(char *str)
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]) == 0)
-			return (-2);
+			return (-1);
 		result = result * 10 + str[i++] - 48;
 		if (result * sign > INT_MAX || result * sign < INT_MIN)
-			return (-2);
+			return (-1);
 	}
 	return (result * sign);
 }
 
 int	check_args(char **av)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (av[++i])
