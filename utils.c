@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:11:11 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/08 16:35:17 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:58:33 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ unsigned long	current_time(void)
 
 void	print_msg(char *str, t_philo *philo)
 {
-	
 	pthread_mutex_lock(&philo->data->print);
 	printf("%ld ms %d %s\n", current_time() - philo->data->start_time,
 		philo->id, str);
@@ -61,9 +60,8 @@ int	check_meals(t_philo *philo)
 	if (count == philo->data->num_philo)
 	{
 		pthread_mutex_unlock(&philo->data->c_eat);
-			return (1);
+		return (1);
 	}
-		
 	pthread_mutex_unlock(&philo->data->c_eat);
 	return (0);
 }
@@ -87,11 +85,8 @@ int	check_dead(t_philo *philo)
 			pthread_mutex_unlock(&philo->data->dead);
 			i++;
 		}
-		if (philo->check_dead == 1){
-			printf("here\n");
+		if (philo->check_dead == 1)
 			return (1);
-		}
-			
 		if (check_meals(philo))
 			return (1);
 	}

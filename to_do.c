@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:21:14 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/08 15:57:46 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/13 00:01:36 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	eat(t_philo *philo)
 	pthread_mutex_lock(&philo->data->c_eat);
 	philo->count_meals++;
 	pthread_mutex_unlock(&philo->data->c_eat);
+	my_sleep(philo->data->time_to_eat);
 }
 
 void	sleep_think(t_philo *philo)
@@ -45,7 +46,6 @@ void	*to_do(void *arg)
 			% philo->data->num_philo]);
 		print_msg("has taken a right fork", philo);
 		eat(philo);
-		my_sleep(philo->data->time_to_eat);
 		pthread_mutex_unlock(&philo->data->forks[philo->id
 			% philo->data->num_philo]);
 		pthread_mutex_unlock(&philo->data->forks[philo->id - 1]);

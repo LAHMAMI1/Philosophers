@@ -6,7 +6,7 @@
 /*   By: olahmami <olahmami@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 23:37:55 by olahmami          #+#    #+#             */
-/*   Updated: 2023/09/08 16:43:21 by olahmami         ###   ########.fr       */
+/*   Updated: 2023/09/12 01:56:05 by olahmami         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,24 @@ int	init_philos_forks(t_philo *philo, t_data *data)
 	return (0);
 }
 
+int	detach_philos(t_philo *philo, t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->num_philo)
+	{
+		if (pthread_detach(philo[i].threads))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 int	join_destroy(t_philo *philo, t_data *data)
 {
 	int	i;
 
-	if (philo->check_dead == 1)
-		return (1);
 	i = 0;
 	while (i < data->num_philo)
 	{
